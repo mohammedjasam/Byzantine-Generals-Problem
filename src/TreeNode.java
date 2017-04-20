@@ -4,6 +4,13 @@
 import java.util.*;
 
 public class TreeNode {
+	
+	public boolean input;
+	public boolean output;
+	public String path;
+		
+	
+	
 	public String name;
 	public int id;
 	public int color;
@@ -16,6 +23,9 @@ public class TreeNode {
     public boolean isRepresentive;
 
     public TreeNode(String name){
+    	
+    		
+    	
         this.name = name;
         this.id = -1;
         this.parent = null;
