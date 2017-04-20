@@ -25,9 +25,9 @@ import edu.uci.ics.jung.visualization.renderers.Renderer;
 
 public class Drawing {
 	
-	public static VisualizationViewer<TreeNode,Number> LoadTree(TreeView tv){
+	public static VisualizationViewer<TreeNode,Number> LoadTree(TreeBuilder tb){
 
-        Graph<TreeNode,Number> graph = createGraph(tv);
+        Graph<TreeNode,Number> graph = createGraph(tb);
 
         VisualizationViewer<TreeNode,Number> vv;
         Dimension dimension = new Dimension(Window.width,Window.height);
@@ -82,11 +82,11 @@ public class Drawing {
         return vv;
     }
 
-    private static Graph<TreeNode, Number> createGraph(TreeView tv) {
+    private static Graph<TreeNode, Number> createGraph(TreeBuilder tb) {
         Graph<TreeNode, Number> graph =   new DirectedOrderedSparseMultigraph<TreeNode, Number>();
-        String[] vertex=new String[tv.size];
+        String[] vertex=new String[tb.size];
         ArrayDeque<TreeNode> nodeQue=new ArrayDeque<TreeNode>();
-        nodeQue.add(tv.root);
+        nodeQue.add(tb.root);
 
         while(!nodeQue.isEmpty()){
             TreeNode dtn=nodeQue.poll();

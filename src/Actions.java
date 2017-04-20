@@ -3,18 +3,18 @@ import java.util.ArrayList;
 public class Actions {
 	
 	public int mode;
-	private TreeView tv;
+	private TreeBuilder tb;
 	
-	public Actions(TreeView tv) {
+	public Actions(TreeBuilder tb) {
 		mode = Constant.Mode_Database_Value;
-		this.tv = tv;
+		this.tb = tb;
 	}
 	
 	public void ShowAnimation(ArrayList<TreeNode> nodePath) {
 		new Thread(){
             @Override
             public void run(){
-            	tv.vv.repaint();
+            	tb.vv.repaint();
             	int counter = 0;
             	for (TreeNode node: nodePath){
             		if(mode == Constant.Mode_Partition && node.isRepresentive == true) node.color = Constant.Color_Representive;
@@ -23,7 +23,7 @@ public class Actions {
             		else node.color = Constant.Color_Animation;
                     try {
 						sleep(1000);
-						tv.vv.repaint();
+						tb.vv.repaint();
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -40,7 +40,7 @@ public class Actions {
             	for (TreeNode node: nodePath){
                     node.color=Constant.Color_Default;
                 }
-                tv.vv.repaint();
+                tb.vv.repaint();
             }
         }.start();
 	}

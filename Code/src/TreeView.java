@@ -23,6 +23,9 @@ public class TreeView {
     public HashMap<String, Integer> database;
     public HashMap<String, Integer> nodeNameIdMap;
     public VisualizationViewer<TreeNode,Number> vv;
+    public void DrawTree(){
+    	this.vv = Drawing.LoadTree(this);
+    }
 
     public TreeView () {
     	this.size = 0;

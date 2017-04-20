@@ -17,6 +17,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JCheckBox;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+
 import java.awt.FlowLayout;
 import java.awt.BorderLayout;
 import javax.swing.BoxLayout;
@@ -42,6 +44,7 @@ public class Window {
 	private JTextField tf_Lieutenants;
 	private JTextField tf_Traitors;
 	private JTextField tf_FinalOutput;
+	private JScrollPane scrollPane;
 
 	/**
 	 * Launch the application.
@@ -72,15 +75,13 @@ public class Window {
 	private void initialize() {
 		
 		//initial file and tree load
-		TreeView tv = new TreeView();
-        tv.BuildTree(Constant.TREE_FILE);
-        tv.BuildDatabase(Constant.USER_FILE);
-        tv.DrawTree();
+		TreeBuilder tb = new TreeBuilder();
+        tb.BuildTree(10,3,tb.root);
+        tb.DrawTree();
         
-        //to fill the leaf combobox
-        String[] leafNames = tv.GetAllLeafNodesName();
+
         //to do work
-        Actions actions = new Actions(tv);
+        Actions actions = new Actions(tb);
         
 		
 		frame = new JFrame();
@@ -167,6 +168,14 @@ public class Window {
 		panel_down.setBounds(0, 111, 1366, 604);
 		frame.getContentPane().add(panel_down);
 		panel_down.setLayout(null);
-		panel_down.add(tv.vv);
+		panel_down.add(tb.vv);
+		
+//		scrollPane = new JScrollPane();
+//		scrollPane.setBounds(0, 0, 2, 2);
+//		panel_down.add(scrollPane);
+		JScrollPane scrollPane = new JScrollPane(panel_down);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+        scrollPane.setBounds(1000,1000,1000,1000);
 	}
 }

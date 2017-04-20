@@ -23,7 +23,7 @@ public class TreeNode {
     public boolean isRepresentive;
 
     public TreeNode(String name){
-    	
+    	this.path = "0";
     		
     	
         this.name = name;
