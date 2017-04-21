@@ -225,8 +225,11 @@ public class Window {
 				tb.lieutenants=Integer.parseInt(tf_Lieutenants.getText());
 				tb.traitors = Integer.parseInt(tf_Traitors.getText());
 				tb.Initialize( );				
-		        tb.BuildTree(Integer.parseInt(tf_Traitors.getText()),tb.root);		        
+		        tb.BuildTree(Integer.parseInt(tf_Traitors.getText()),tb.root);	
+		        tb.runAlgorithm(tb.root);
 		        tb.DrawTree();
+		        tb.vv.repaint();
+		        tf_FinalOutput.setText(tb.root.output? "Attack": "Retreat");
 				
 				scroll_pane = new GraphZoomScrollPane(tb.vv);
 				scroll_pane.setBounds(0, 0, width, 605);
@@ -251,10 +254,8 @@ public class Window {
 		panel_down.setBounds(0, 111, 1366, 604);
 		frame.getContentPane().add(panel_down);
 		panel_down.setLayout(null);
-//		drawIt(tb);
-//		panel_down.add
-
-	
+		
+		
 	}
 
 	

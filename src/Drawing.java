@@ -63,10 +63,16 @@ public class Drawing {
             }
         };
         
+        Transformer<TreeNode,String> vertexLabel = new Transformer<TreeNode,String>() {
+            public String transform(TreeNode n) {
+            	return n.name + "," + n.input + "," + n.output;
+            }
+        };
+        
         Transformer<TreeNode,Stroke> vertexStroke = new Transformer<TreeNode,Stroke>() {
             public Stroke transform(TreeNode n) {
             	if(n.isTraitor == true){
-            		return new BasicStroke(2.0f); 
+            		return new BasicStroke(3.0f); 
             	}
             	else {
             		return new BasicStroke(1.0f);
@@ -77,6 +83,7 @@ public class Drawing {
         vv = new VisualizationViewer<TreeNode,Number>(layout1, dimension);
         vv.setBounds(0, -100, Window.width, Window.height);
         vv.getRenderContext().setVertexStrokeTransformer(vertexStroke);
+        vv.getRenderContext().setVertexLabelTransformer(vertexLabel);
         vv.getRenderContext().setVertexFillPaintTransformer(vertexColor);
         vv.getRenderContext().setEdgeShapeTransformer(new EdgeShape.Line());
         vv.getRenderContext().setVertexLabelTransformer(new ToStringLabeller());

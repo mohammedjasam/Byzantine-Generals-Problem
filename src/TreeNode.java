@@ -5,6 +5,8 @@ public class TreeNode {
 	public boolean input;
 	public boolean output;
 	public String path;
+	public int noOfAttack;
+	public int noOfRetreat;
 		
 	
 	public boolean isTraitor;
@@ -23,6 +25,10 @@ public class TreeNode {
     	this.path = "0";   	
         this.name = name;
     	this.isTraitor = false;
+    	
+    	this.noOfAttack = 0;
+    	this.noOfRetreat = 0;
+    	
         this.id = -1;
         this.parent = null;
         this.color = Constant.Color_Default;
