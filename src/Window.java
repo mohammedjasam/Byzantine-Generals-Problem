@@ -30,6 +30,8 @@ import java.awt.Insets;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.JScrollBar;
 
 public class Window {
@@ -113,6 +115,41 @@ public class Window {
 		cb_ShowIData.setBackground(Color.LIGHT_GRAY);
 		cb_ShowIData.setBounds(107, 66, 237, 31);
 		cb_ShowIData.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		cb_FaultyGeneral.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+				if (cb_FaultyGeneral.isSelected()){
+					System.out.println("Selected");
+				}
+				else{
+					System.out.println("Not Selected");
+				}
+				
+			}
+		});
+		
+		cb_ShowIData.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+				if (cb_ShowIData.isSelected()){
+					System.out.println("Selected");
+				}
+				else{
+					System.out.println("Not Selected");
+				}
+				
+			}
+		});
+		
+		
+		
 		panel1.setLayout(null);
 		panel1.add(cb_FaultyGeneral);
 		panel1.add(cb_ShowIData);
@@ -154,19 +191,15 @@ public class Window {
 		panel3.setBackground(Color.LIGHT_GRAY);
 		panel_up.add(panel3);
 		panel3.setLayout(new GridLayout(0, 1, 0, 0));
-		
+		tb.Initialize();
+		tb.BuildTree(0, 0, tb.root);
 		btn_runAlgorithm = new JButton("Broadcast");
 		btn_runAlgorithm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				panel_down.removeAll();
+//				panel_down.removeAll();
 				
-				tb.Initialize();
 		        tb.BuildTree(Integer.parseInt(tf_Lieutenants.getText()),Integer.parseInt(tf_Traitors.getText()),tb.root);
-		        tb.DrawTree();
-
-				scroll_pane = new GraphZoomScrollPane(tb.vv);
-		        scroll_pane.setBounds(0, 0, width, 605);
-		        panel_down.add(scroll_pane);		
+		        drawIt(tb);
 			}
 		});
 		panel3.add(btn_runAlgorithm);
@@ -187,5 +220,18 @@ public class Window {
 		panel_down.setBounds(0, 111, 1366, 604);
 		frame.getContentPane().add(panel_down);
 		panel_down.setLayout(null);
+		drawIt(tb);
+//		panel_down.add
+		
+	
 	}
+	public void drawIt(TreeBuilder tb){
+		tb.DrawTree();
+		
+		scroll_pane = new GraphZoomScrollPane(tb.vv);
+		scroll_pane.setBounds(0, 0, width, 605);
+		panel_down.add(scroll_pane);
+	}
+	
+	
 }
