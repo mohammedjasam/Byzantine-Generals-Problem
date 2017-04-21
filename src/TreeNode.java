@@ -1,7 +1,7 @@
 import java.util.*;
 
-public class TreeNode {
-	
+public class TreeNode 
+{	
 	public boolean input;
 	public boolean output;
 	public String path;
@@ -21,7 +21,8 @@ public class TreeNode {
     public HashMap<String, Integer> fpointer;
     public boolean isRepresentive;
 
-    public TreeNode(String name){
+    public TreeNode(String name)
+    {
     	this.path = "0";   	
         this.name = name;
     	this.isTraitor = false;
@@ -38,13 +39,15 @@ public class TreeNode {
         this.fpointer = new HashMap<String, Integer>();
     }
 
-    public void addChild(TreeNode child){
+    public void addChild(TreeNode child)
+    {
         this.children.add(child);
         child.parent = this;
     }
    
     @Override
-    public String toString(){
+    public String toString()
+    {
         return name;
     }
 }

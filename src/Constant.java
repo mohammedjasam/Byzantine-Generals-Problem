@@ -1,6 +1,7 @@
 import java.io.File;
 
-public class Constant {
+public class Constant 
+{
     public static final File TREE_FILE = new File("Files/Tree.xml");
     public static final File USER_FILE = new File("Files/User.xml");
     
@@ -9,7 +10,6 @@ public class Constant {
     public static final int Mode_Forwarding_Pointer = 2;
     public static final int Mode_Partition = 3;
     
-//    public static final int Color_Default = 0;
     public static final int Color_Animation = 1;
     public static final int Color_Representive = 2;
     public static final int Color_Source = 3;

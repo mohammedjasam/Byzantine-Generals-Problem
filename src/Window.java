@@ -36,7 +36,8 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.JScrollBar;
 
-public class Window {
+public class Window 
+{
 
 	public static final int height=718;
 	public static final int width=1366;
@@ -59,13 +60,18 @@ public class Window {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
+	public static void main(String[] args) 
+	{
+		EventQueue.invokeLater(new Runnable() 
+		{
+			public void run() 
+			{
+				try 
+				{
 					Window window = new Window();
 					window.frame.setVisible(true);
-				} catch (Exception e) {
+				} catch (Exception e) 
+				{
 					e.printStackTrace();
 				}
 			}
@@ -75,16 +81,16 @@ public class Window {
 	/**
 	 * Create the application.
 	 */
-	public Window() {
+	public Window() 
+	{
 		initialize();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
-		
-
+	private void initialize() 
+	{
 		//initial file and tree load
 		TreeBuilder tb = new TreeBuilder();
         //to do work
@@ -118,39 +124,24 @@ public class Window {
 		cb_ShowIData.setBounds(107, 66, 237, 31);
 		cb_ShowIData.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		cb_FaultyGeneral.addActionListener(new ActionListener() {
-			
+		cb_FaultyGeneral.addActionListener(new ActionListener() 
+		{			
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) 
+			{
 				// TODO Auto-generated method stub
 				
-				if (cb_FaultyGeneral.isSelected()){
+				if (cb_FaultyGeneral.isSelected())
+				{
 					tb.faultyGeneral = true;
 				}
-				else{
+				else
+				{
 					tb.faultyGeneral = false;
 				}
 				
 			}
 		});
-		
-//		cb_ShowIData.addActionListener(new ActionListener() {
-//			
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				// TODO Auto-generated method stub
-//				
-//				if (cb_ShowIData.isSelected()){
-//					System.out.println("Selected");
-//				}
-//				else{
-//					System.out.println("Not Selected");
-//				}
-//				
-//			}
-//		});
-		
-		
 		
 		panel1.setLayout(null);
 		panel1.add(cb_FaultyGeneral);
@@ -192,10 +183,11 @@ public class Window {
 		buttonGroup.add(rb_Attack);
 		buttonGroup.add(rb_Retreat);
 		
-		rb_Retreat.addActionListener(new ActionListener() {
-			
+		rb_Retreat.addActionListener(new ActionListener() 
+		{			
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) 
+			{
 				// TODO Auto-generated method stub
 				
 				tb.command = Constant.Retreat;
@@ -203,25 +195,28 @@ public class Window {
 			}
 		});
 		
-		rb_Attack.addActionListener(new ActionListener() {
+		rb_Attack.addActionListener(new ActionListener() 
+		{
 			
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) 
+			{
 				// TODO Auto-generated method stub
 				tb.command = Constant.Attack;
 			}
 		});
-		
-		
+				
 		panel3 = new JPanel();
 		panel3.setBackground(Color.LIGHT_GRAY);
 		panel_up.add(panel3);
 		panel3.setLayout(new GridLayout(0, 1, 0, 0));
 		tb.BuildTree(0, tb.root);
 		btn_runAlgorithm = new JButton("Broadcast");
-		btn_runAlgorithm.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-//				panel_down.removeAll();
+		
+		btn_runAlgorithm.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
 				tb.lieutenants=Integer.parseInt(tf_Lieutenants.getText());
 				tb.traitors = Integer.parseInt(tf_Traitors.getText());
 				tb.Initialize( );				
@@ -253,11 +248,6 @@ public class Window {
 		panel_down.setBackground(Color.RED);
 		panel_down.setBounds(0, 111, 1366, 604);
 		frame.getContentPane().add(panel_down);
-		panel_down.setLayout(null);
-		
-		
-	}
-
-	
-	
+		panel_down.setLayout(null);		
+	}	
 }

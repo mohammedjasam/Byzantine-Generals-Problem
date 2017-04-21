@@ -25,10 +25,10 @@ import edu.uci.ics.jung.visualization.decorators.EdgeShape;
 import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
 import edu.uci.ics.jung.visualization.renderers.Renderer;
 
-public class Drawing {
-	
-	public static VisualizationViewer<TreeNode,Number> LoadTree(TreeBuilder tb){
-
+public class Drawing 
+{	
+	public static VisualizationViewer<TreeNode,Number> LoadTree(TreeBuilder tb)
+	{
         Graph<TreeNode,Number> graph = createGraph(tb);
 
         VisualizationViewer<TreeNode,Number> vv;
@@ -49,12 +49,16 @@ public class Drawing {
             }
         };
 
-        Transformer<TreeNode,Paint> vertexColor = new Transformer<TreeNode,Paint>() {
-            public Paint transform(TreeNode n) {
-            	if(n.color == Constant.Color_Attack){
+        Transformer<TreeNode,Paint> vertexColor = new Transformer<TreeNode,Paint>() 
+        {
+            public Paint transform(TreeNode n) 
+            {
+            	if(n.color == Constant.Color_Attack)
+            	{
             		return Color.GREEN;
             	}
-            	else if(n.color == Constant.Color_Retreat){
+            	else if(n.color == Constant.Color_Retreat)
+            	{
             		return Color.RED;
             	}
             	else {
@@ -63,18 +67,24 @@ public class Drawing {
             }
         };
         
-        Transformer<TreeNode,String> vertexLabel = new Transformer<TreeNode,String>() {
-            public String transform(TreeNode n) {
+        Transformer<TreeNode,String> vertexLabel = new Transformer<TreeNode,String>() 
+        {
+            public String transform(TreeNode n) 
+            {
             	return n.name + "," + n.input + "," + n.output;
             }
         };
         
-        Transformer<TreeNode,Stroke> vertexStroke = new Transformer<TreeNode,Stroke>() {
-            public Stroke transform(TreeNode n) {
-            	if(n.isTraitor == true){
+        Transformer<TreeNode,Stroke> vertexStroke = new Transformer<TreeNode,Stroke>() 
+        {
+            public Stroke transform(TreeNode n) 
+            {
+            	if(n.isTraitor == true)
+            	{
             		return new BasicStroke(3.0f); 
             	}
-            	else {
+            	else 
+            	{
             		return new BasicStroke(1.0f);
             	}
             }
@@ -96,23 +106,27 @@ public class Drawing {
         return vv;
     }
 
-    private static Graph<TreeNode, Number> createGraph(TreeBuilder tb) {
+    private static Graph<TreeNode, Number> createGraph(TreeBuilder tb) 
+    {
         Graph<TreeNode, Number> graph =   new DirectedOrderedSparseMultigraph<TreeNode, Number>();
         String[] vertex=new String[tb.size];
         ArrayDeque<TreeNode> nodeQue=new ArrayDeque<TreeNode>();
         nodeQue.add(tb.root);
 
-        while(!nodeQue.isEmpty()){
+        while(!nodeQue.isEmpty())
+        {
             TreeNode dtn=nodeQue.poll();
             TreeNode dtnParent=nodeQue.poll();
             graph.addVertex(dtn);
 
-            if(dtnParent!=null){
+            if(dtnParent!=null)
+            {
                 graph.addEdge(Window.edgeName,dtnParent,dtn);
                 Window.edgeName++;
             }
 
-            for(TreeNode children:dtn.children){
+            for(TreeNode children:dtn.children)
+            {
                 nodeQue.add(children);
                 nodeQue.add(dtn);
             }
