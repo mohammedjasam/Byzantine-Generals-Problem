@@ -9,6 +9,8 @@ import java.awt.Color;
 
 import javax.swing.SwingConstants;
 
+import edu.uci.ics.jung.visualization.GraphZoomScrollPane;
+
 import javax.swing.JButton;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Font;
@@ -28,12 +30,15 @@ import java.awt.Insets;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JScrollBar;
 
 public class Window {
 
 	public static final int height=718;
 	public static final int width=1366;
 	public static int edgeName=0;
+	
+	GraphZoomScrollPane scroll_pane;
 	
 	private JFrame frame;
 	private JPanel panel_up;
@@ -45,6 +50,7 @@ public class Window {
 	private JTextField tf_Traitors;
 	private JTextField tf_FinalOutput;
 	private JScrollPane scrollPane;
+	private JButton btn_runAlgorithm;
 
 	/**
 	 * Launch the application.
@@ -74,12 +80,9 @@ public class Window {
 	 */
 	private void initialize() {
 		
+
 		//initial file and tree load
 		TreeBuilder tb = new TreeBuilder();
-        tb.BuildTree(10,3,tb.root);
-        tb.DrawTree();
-        
-
         //to do work
         Actions actions = new Actions(tb);
         
@@ -152,6 +155,22 @@ public class Window {
 		panel_up.add(panel3);
 		panel3.setLayout(new GridLayout(0, 1, 0, 0));
 		
+		btn_runAlgorithm = new JButton("Broadcast");
+		btn_runAlgorithm.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panel_down.removeAll();
+				
+				tb.Initialize();
+		        tb.BuildTree(Integer.parseInt(tf_Lieutenants.getText()),Integer.parseInt(tf_Traitors.getText()),tb.root);
+		        tb.DrawTree();
+
+				scroll_pane = new GraphZoomScrollPane(tb.vv);
+		        scroll_pane.setBounds(0, 0, width, 605);
+		        panel_down.add(scroll_pane);		
+			}
+		});
+		panel3.add(btn_runAlgorithm);
+		
 		JLabel lb_FinalOutput = new JLabel("Final Output");
 		lb_FinalOutput.setHorizontalAlignment(SwingConstants.CENTER);
 		panel3.add(lb_FinalOutput);
@@ -168,14 +187,5 @@ public class Window {
 		panel_down.setBounds(0, 111, 1366, 604);
 		frame.getContentPane().add(panel_down);
 		panel_down.setLayout(null);
-		panel_down.add(tb.vv);
-		
-//		scrollPane = new JScrollPane();
-//		scrollPane.setBounds(0, 0, 2, 2);
-//		panel_down.add(scrollPane);
-		JScrollPane scrollPane = new JScrollPane(panel_down);
-        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-        scrollPane.setBounds(1000,1000,1000,1000);
 	}
 }

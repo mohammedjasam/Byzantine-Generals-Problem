@@ -8,7 +8,7 @@ public class TreeBuilder {
     public VisualizationViewer<TreeNode,Number> vv;
 
 	
-	public TreeBuilder(){
+	public void Initialize(){
 		root = new TreeNode("G");
 		root.id = 0;
 		size = 1;
