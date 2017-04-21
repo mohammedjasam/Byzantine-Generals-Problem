@@ -222,13 +222,8 @@ public class Window {
 		btn_runAlgorithm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 //				panel_down.removeAll();
-				tb.Initialize();				
-		        tb.BuildTree(Integer.parseInt(tf_Lieutenants.getText()),Integer.parseInt(tf_Traitors.getText()),tb.root);		        
-		        tb.DrawTree();
-				
-				scroll_pane = new GraphZoomScrollPane(tb.vv);
-				scroll_pane.setBounds(0, 0, width, 605);
-				panel_down.add(scroll_pane);
+				drawIt(tf_Lieutenants.getText(), tf_Traitors.getText());
+
 			}
 		});
 		panel3.add(btn_runAlgorithm);
@@ -249,13 +244,20 @@ public class Window {
 		panel_down.setBounds(0, 111, 1366, 604);
 		frame.getContentPane().add(panel_down);
 		panel_down.setLayout(null);
-		drawIt(tb);
+//		drawIt(tb);
 //		panel_down.add
-		
+
 	
 	}
-	public void drawIt(TreeBuilder tb){
+	public void drawIt(String a, String b){
+		TreeBuilder tb = new TreeBuilder();
+		tb.Initialize();				
+        tb.BuildTree(Integer.parseInt(a),Integer.parseInt(b),tb.root);		        
+        tb.DrawTree();
 		
+		scroll_pane = new GraphZoomScrollPane(tb.vv);
+		scroll_pane.setBounds(0, 0, width, 605);
+		panel_down.add(scroll_pane);
 	}
 	
 	
