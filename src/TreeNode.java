@@ -1,6 +1,3 @@
-/**
- * Created by shudip on 2/8/2017.
- */
 import java.util.*;
 
 public class TreeNode {
@@ -10,7 +7,7 @@ public class TreeNode {
 	public String path;
 		
 	
-	
+	public boolean isTraitor;
 	public String name;
 	public int id;
 	public int color;
@@ -23,10 +20,9 @@ public class TreeNode {
     public boolean isRepresentive;
 
     public TreeNode(String name){
-    	this.path = "0";
-    		
-    	
+    	this.path = "0";   	
         this.name = name;
+    	this.isTraitor = false;
         this.id = -1;
         this.parent = null;
         this.color = Constant.Color_Default;

@@ -1,6 +1,3 @@
-/**
- * Created by shudip on 2/8/2017.
- */
 import java.io.File;
 
 public class Constant {
@@ -12,9 +9,14 @@ public class Constant {
     public static final int Mode_Forwarding_Pointer = 2;
     public static final int Mode_Partition = 3;
     
-    public static final int Color_Default = 0;
+//    public static final int Color_Default = 0;
     public static final int Color_Animation = 1;
     public static final int Color_Representive = 2;
     public static final int Color_Source = 3;
     public static final int Color_Destination = 4;
+    
+    
+    public static final int Color_Default = 0;
+    public static final int Color_Attack = 1;
+    public static final int Color_Retreat = 2;
 }

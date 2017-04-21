@@ -1,5 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.BasicStroke;
+import java.awt.Stroke;
 import java.awt.Dimension;
 import java.awt.Paint;
 import java.awt.Shape;
@@ -49,27 +51,32 @@ public class Drawing {
 
         Transformer<TreeNode,Paint> vertexColor = new Transformer<TreeNode,Paint>() {
             public Paint transform(TreeNode n) {
-            	if(n.color == Constant.Color_Animation){
-            		return Color.MAGENTA;
-            	}
-            	else if(n.color == Constant.Color_Representive){
-            		return Color.BLUE;
-            	}
-            	else if(n.color == Constant.Color_Source){
-            		return Color.RED;
-            	}
-            	else if(n.color == Constant.Color_Destination){
+            	if(n.color == Constant.Color_Attack){
             		return Color.GREEN;
+            	}
+            	else if(n.color == Constant.Color_Retreat){
+            		return Color.RED;
             	}
             	else {
             		return Color.WHITE;
             	}
             }
         };
+        
+        Transformer<TreeNode,Stroke> vertexStroke = new Transformer<TreeNode,Stroke>() {
+            public Stroke transform(TreeNode n) {
+            	if(n.isTraitor == true){
+            		return new BasicStroke(2.0f); 
+            	}
+            	else {
+            		return new BasicStroke(1.0f);
+            	}
+            }
+        };
 
         vv = new VisualizationViewer<TreeNode,Number>(layout1, dimension);
         vv.setBounds(0, -100, Window.width, Window.height);
-
+        vv.getRenderContext().setVertexStrokeTransformer(vertexStroke);
         vv.getRenderContext().setVertexFillPaintTransformer(vertexColor);
         vv.getRenderContext().setEdgeShapeTransformer(new EdgeShape.Line());
         vv.getRenderContext().setVertexLabelTransformer(new ToStringLabeller());
