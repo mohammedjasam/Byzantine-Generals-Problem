@@ -24,6 +24,8 @@ import javax.swing.JScrollPane;
 import java.awt.FlowLayout;
 import java.awt.BorderLayout;
 import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -176,7 +178,7 @@ public class Window {
 		tf_Traitors.setHorizontalAlignment(SwingConstants.CENTER);
 		tf_Traitors.setColumns(10);
 		panel2.add(tf_Traitors);
-		
+		ButtonGroup buttonGroup = new ButtonGroup();
 		JRadioButton rb_Retreat = new JRadioButton("Retreat");
 		rb_Retreat.setBackground(Color.LIGHT_GRAY);
 		rb_Retreat.setHorizontalAlignment(SwingConstants.CENTER);
@@ -187,19 +189,46 @@ public class Window {
 		rb_Attack.setHorizontalAlignment(SwingConstants.CENTER);
 		panel2.add(rb_Attack);
 		
+		buttonGroup.add(rb_Attack);
+		buttonGroup.add(rb_Retreat);
+		
+		rb_Retreat.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+				System.out.println("Retreat");
+				
+			}
+		});
+		
+		rb_Attack.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				System.out.println("Attack");
+			}
+		});
+		
+		
 		panel3 = new JPanel();
 		panel3.setBackground(Color.LIGHT_GRAY);
 		panel_up.add(panel3);
 		panel3.setLayout(new GridLayout(0, 1, 0, 0));
-		tb.Initialize();
 		tb.BuildTree(0, 0, tb.root);
 		btn_runAlgorithm = new JButton("Broadcast");
 		btn_runAlgorithm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 //				panel_down.removeAll();
+				tb.Initialize();				
+		        tb.BuildTree(Integer.parseInt(tf_Lieutenants.getText()),Integer.parseInt(tf_Traitors.getText()),tb.root);		        
+		        tb.DrawTree();
 				
-		        tb.BuildTree(Integer.parseInt(tf_Lieutenants.getText()),Integer.parseInt(tf_Traitors.getText()),tb.root);
-		        drawIt(tb);
+				scroll_pane = new GraphZoomScrollPane(tb.vv);
+				scroll_pane.setBounds(0, 0, width, 605);
+				panel_down.add(scroll_pane);
 			}
 		});
 		panel3.add(btn_runAlgorithm);
@@ -226,11 +255,7 @@ public class Window {
 	
 	}
 	public void drawIt(TreeBuilder tb){
-		tb.DrawTree();
 		
-		scroll_pane = new GraphZoomScrollPane(tb.vv);
-		scroll_pane.setBounds(0, 0, width, 605);
-		panel_down.add(scroll_pane);
 	}
 	
 	
