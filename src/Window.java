@@ -125,30 +125,30 @@ public class Window {
 				// TODO Auto-generated method stub
 				
 				if (cb_FaultyGeneral.isSelected()){
-					System.out.println("Selected");
+					tb.faultyGeneral = true;
 				}
 				else{
-					System.out.println("Not Selected");
+					tb.faultyGeneral = false;
 				}
 				
 			}
 		});
 		
-		cb_ShowIData.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
-				if (cb_ShowIData.isSelected()){
-					System.out.println("Selected");
-				}
-				else{
-					System.out.println("Not Selected");
-				}
-				
-			}
-		});
+//		cb_ShowIData.addActionListener(new ActionListener() {
+//			
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				// TODO Auto-generated method stub
+//				
+//				if (cb_ShowIData.isSelected()){
+//					System.out.println("Selected");
+//				}
+//				else{
+//					System.out.println("Not Selected");
+//				}
+//				
+//			}
+//		});
 		
 		
 		
@@ -198,7 +198,7 @@ public class Window {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				
-				System.out.println("Retreat");
+				tb.command = Constant.Retreat;
 				
 			}
 		});
@@ -208,7 +208,7 @@ public class Window {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				System.out.println("Attack");
+				tb.command = Constant.Attack;
 			}
 		});
 		
@@ -217,13 +217,15 @@ public class Window {
 		panel3.setBackground(Color.LIGHT_GRAY);
 		panel_up.add(panel3);
 		panel3.setLayout(new GridLayout(0, 1, 0, 0));
-		tb.BuildTree(0, 0, tb.root);
+		tb.BuildTree(0, tb.root);
 		btn_runAlgorithm = new JButton("Broadcast");
 		btn_runAlgorithm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 //				panel_down.removeAll();
-				tb.Initialize();				
-		        tb.BuildTree(Integer.parseInt(tf_Lieutenants.getText()),Integer.parseInt(tf_Traitors.getText()),tb.root);		        
+				tb.lieutenants=Integer.parseInt(tf_Lieutenants.getText());
+				tb.traitors = Integer.parseInt(tf_Traitors.getText());
+				tb.Initialize( );				
+		        tb.BuildTree(Integer.parseInt(tf_Traitors.getText()),tb.root);		        
 		        tb.DrawTree();
 				
 				scroll_pane = new GraphZoomScrollPane(tb.vv);

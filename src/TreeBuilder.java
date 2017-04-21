@@ -3,8 +3,12 @@ import java.util.*;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 public class TreeBuilder {
 
-	TreeNode root;
-	int size;
+	public TreeNode root;
+	public int size;
+	public int lieutenants;
+	public int traitors;
+	public boolean faultyGeneral;
+	public boolean command;
     public VisualizationViewer<TreeNode,Number> vv;
 
 	
@@ -14,9 +18,9 @@ public class TreeBuilder {
 		size = 1;
 	}
 	
-	public void BuildTree(int lieutenants, int traitors, TreeNode t)
+	public void BuildTree(int traitorNum, TreeNode t)
 	{
-		if(traitors<1)
+		if(traitorNum<1)
 		{
 			return;
 		}
@@ -29,7 +33,7 @@ public class TreeBuilder {
 				c.path += c.id;		
 				t.addChild(c);
 				size++;
-				BuildTree(lieutenants, traitors-1, c);
+				BuildTree(traitorNum-1, c);
 			}			
 		}
 	}

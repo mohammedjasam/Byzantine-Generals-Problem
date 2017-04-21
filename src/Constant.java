@@ -19,4 +19,7 @@ public class Constant {
     public static final int Color_Default = 0;
     public static final int Color_Attack = 1;
     public static final int Color_Retreat = 2;
+    
+    public static final boolean Attack = true;
+    public static final boolean Retreat = false;
 }
