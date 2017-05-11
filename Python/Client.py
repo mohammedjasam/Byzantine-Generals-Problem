@@ -1,10 +1,11 @@
 #!usr/bin/python
 from socket import *
-
+import math
+from random import randint
 host = 'localhost' # '127.0.0.1' can also be used
 port = 52000
 
-index,isT = -1,-1
+index,isT,noL,noT,command = -1,-1,-1,-1,-1
 
 sock = socket()
 sock.connect((host, port)) #Connect takes tuple of host and port
@@ -24,8 +25,26 @@ while 1:
         isT = 1
     if keyWord == "INDEX":
         index = dataArr[1]
+    if keyWord == "COMMAND":
+        noL = int(dataArr[1])
+        noT = int(dataArr[2])
+        command = int(dataArr[4])
+        # path = dataArr[3]
+        # pathLen = len(dataArr[3])
+        # for i in range(noT - pathLen):
+        for j in range(noL):
+            if j == index:
+                pass
+            else:
+                if isT:
+                    sock.send("INPUT C|%s %s %s" %(index,randint(0,1),j))
+                else:
+                    sock.send("INPUT C|%s %s %s" %(index,command,j))
+        print(dataArr)
 
 
+    if keyWord == "INPUT":
+        print(dataArr)
 
 sock.close()
 

@@ -46,11 +46,11 @@ while True:
     conn, addr = sock.accept()
     connList.append(conn)  ## List to store the conn objects
     start_new_thread(clientthread,(conn,)) #start new thread takes 1st argument as a function name to be run, second is the tuple of arguments to the function.
-    print "Connected to:%s" %(len(connList)-1)
+    print "Connected to: %s" %(len(connList)-1)
     if len(connList)==noL:
         break
 
-
+print(ran)
 for x in range(noL):
     connList[x].send("INDEX %s"%x)
 
@@ -58,6 +58,17 @@ for i in ran:
     connList[i].send("TRAITOR")
 
 
+#starting algorithm
+
+if isT:
+    for x in range(noL):
+        connList[x].send("COMMAND %s %s C %s" %(noL, noT, randint(0,1)))
+else:
+    for x in range(noL):
+        connList[x].send("COMMAND %s %s C %s" %(noL, noT, command))
+
+while 1:
+    a=1
 
 
 
