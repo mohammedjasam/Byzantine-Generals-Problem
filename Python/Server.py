@@ -49,8 +49,13 @@ while True:
     if len(connList)==noL:
         break
 
+
+for x in range(noL):
+    connList[x].send("INDEX %s"%x)
+
 for i in ran:
     connList[i].send("TRAITOR")
+
 
 
 
