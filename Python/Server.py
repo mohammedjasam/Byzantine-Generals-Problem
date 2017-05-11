@@ -3,7 +3,7 @@ import socket
 
 def main():
     # Defining the Host address and the port at which we want to communicate
-    host = "127.0.0.1"
+    host = ""
     port = 5000
 
     s = socket.socket()

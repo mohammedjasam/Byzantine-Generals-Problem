@@ -10,7 +10,7 @@ def main():
     message = raw_input("-> ")
 
     while message!="q":
-        s.send(message)
+        s.sendall(message)
         data = s.recv(1024)
 
         print "Received from Server: "+ str(data)
