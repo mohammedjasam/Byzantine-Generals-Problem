@@ -8,13 +8,30 @@ sock = socket()
 #Connecting to socket
 sock.connect((host, port)) #Connect takes tuple of host and port
 
+
 #Infinite loop to keep client running.
-while True:
+message = raw_input("-> ")
+
+while message!="q":
     data = sock.recv(1024)
     print data
-    sock.send('HI! I am client.')
-
+    sock.send(message)
+    message = raw_input("-> ")
 sock.close()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # import socket
 #
