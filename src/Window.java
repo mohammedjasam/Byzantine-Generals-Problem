@@ -35,6 +35,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.JScrollBar;
+import java.awt.Frame;
 
 public class Window 
 {
@@ -64,7 +65,7 @@ public class Window
 	{
 		EventQueue.invokeLater(new Runnable() 
 		{
-			public void run() 
+			public void run()
 			{
 				try 
 				{
@@ -98,9 +99,10 @@ public class Window
         
 		
 		frame = new JFrame();
+		frame.setExtendedState(Frame.MAXIMIZED_BOTH);
+		frame.setResizable(false);
 		frame.setBounds(0, 0, width, height);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		frame.getContentPane().setLayout(null);
 		
 		
@@ -238,6 +240,7 @@ public class Window
 		panel3.add(lb_FinalOutput);
 		
 		tf_FinalOutput = new JTextField();
+		tf_FinalOutput.setFont(new Font("Tahoma", Font.PLAIN, 39));
 		tf_FinalOutput.setBackground(Color.LIGHT_GRAY);
 		tf_FinalOutput.setHorizontalAlignment(SwingConstants.CENTER);
 		tf_FinalOutput.setEditable(false);
