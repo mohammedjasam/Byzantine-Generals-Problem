@@ -13,9 +13,10 @@ sock.connect((host, port)) #Connect takes tuple of host and port
 # #Infinite loop to keep client running.
 # message = raw_input("-> ")
 
-while message!="q":
+# while message!="q":
+while 1:
     data = sock.recv(1024)
-
+    print data
     dataArr = data.split()
     keyWord = dataArr[0]
 

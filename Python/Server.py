@@ -13,8 +13,8 @@ port = 52000 #Use port > 1024, below it all are reserved
 
 
 # print "Enter"
-print "# of L, # of T, isTraitor?, Command\n")
-noL,noT,isT,command = 6,2,1,1
+print "# of L, # of T, isTraitor?, Command\n"
+noL,noT,isT,command = 2,2,1,1
 
 
 ran = []  ## List to store the Random Traitors
@@ -22,7 +22,7 @@ for i in range(noT-isT):
     while True:
         x = randint(0,noL)
         if x not in ran:
-            ran.append()
+            ran.append(x)
             break
 
 
@@ -45,7 +45,8 @@ connList = []
 while True:
     conn, addr = sock.accept()
     connList.append(conn)  ## List to store the conn objects
-    start_new_thread(clientthread,(conn,'Hi! I am server\n')) #start new thread takes 1st argument as a function name to be run, second is the tuple of arguments to the function.
+    start_new_thread(clientthread,(conn,)) #start new thread takes 1st argument as a function name to be run, second is the tuple of arguments to the function.
+    print "Connected to:%s" %(len(connList)-1)
     if len(connList)==noL:
         break
 
