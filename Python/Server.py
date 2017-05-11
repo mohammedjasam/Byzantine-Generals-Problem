@@ -25,5 +25,5 @@ def main():
         c.send(data)
 
     c.close()
-if __name__ = "__main__":
+if __name__ == "__main__":
     main()
