@@ -14,14 +14,14 @@ def main():
     # We listen to one Client at a time!
     s.listen(1)
     c, addr = s.accept()
-    print("Connection From: " + str(addr))
+    print "Connection From: " + str(addr)
     while True:
         data  =  c.recv(1024)
         if not data:
             break
-        print("From connected user: " + str(data))
+        print "From connected user: " + str(data)
         data = str(data).upper()
-        print("Sending: " + str(data))
+        print "Sending: " + str(data)
         c.send(data)
 
     c.close()

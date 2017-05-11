@@ -7,15 +7,15 @@ def main():
     s = socket.socket()
     s.connect((host, port))
 
-    message = input("-> ")
+    message = raw_input("-> ")
 
     while message!="q":
         s.send(message)
         data = s.recv(1024)
 
-        print("Received from Server: "+ str(data))
+        print "Received from Server: "+ str(data)
 
-        message = input("-> ")
+        message = raw_input("-> ")
 
     s.close()
 
