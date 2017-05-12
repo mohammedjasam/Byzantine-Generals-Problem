@@ -68,7 +68,7 @@ while 1:
         # try:
         #     if last!=-1:
 
-        print "DataArr is: %s"%dataArr
+        # print "DataArr is: %s"%dataArr
         noOP.append(dataArr[1])
         # print "OP is: %s" %noOP
         if len(noOP) == noL-1:
@@ -76,9 +76,9 @@ while 1:
             if noOP.count("1")>noOP.count("0"):
                 sock.send("MAJORITY 1")
                 print "MAJORITY 1"
-            elif noOP.count("1")<noOP.count("0"):
+            else:# noOP.count("1")<noOP.count("0"):
                 sock.send("MAJORITY 0")
                 print "MAJORITY 0"
-            else:
-                sock.send("MAJORITY %s"%defVal)
-                print "MAJORITY %s" %defVal
+            # else:
+            #     sock.send("MAJORITY %s"%defVal)
+            #     print "MAJORITY %s" %defVal
