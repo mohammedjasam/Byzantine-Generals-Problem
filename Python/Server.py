@@ -1,8 +1,8 @@
-# Import all from module socket
+import time
 from socket import *
-#Importing all from thread
 from thread import *
 import math
+import threading
 from random import randint
 
 
@@ -14,8 +14,8 @@ port = 52000 #Use port > 1024, below it all are reserved
 
 # print "Enter"
 print "# of L, # of T, isTraitor?, Command\n"
-noL,noT,isT,command = 3,2,1,1
-
+noL,noT,isT,command = 3,1,1,1
+noM = []
 
 ran = []  ## List to store the Random Traitors
 for i in range(noT-isT):
@@ -39,10 +39,12 @@ def clientthread(conn):
      while True:
          data = conn.recv(1024) # 1024 stands for bytes of data to be received
          print data
-
+         #time.sleep(0.05)
+         thread
          dataArr = data.split()
          keyWord = dataArr[0]
-
+        #  print dataArr
+        threading.Event().wait()
          if keyWord == "INPUT":
              path = dataArr[1]
              cmd = dataArr[2]
@@ -50,9 +52,17 @@ def clientthread(conn):
              child.send("INPUT %s %s" %(path, cmd))
 
          if keyWord == "OUTPUT":
-             cmd = dataArr[1];
+             cmd = dataArr[1]
              child = connList[int(dataArr[2])]
              child.send("OUTPUT %s" %(cmd))
+
+         if keyWord == "MAJORITY":
+             noM.append(dataArr[1])
+             if(len(noM) == noL):
+                 if noM.count("1")>noM.count("0"):
+                     print "Final output: 1"
+                 else:
+                     print "Final output: 0"
 
 
 connList = []
@@ -67,21 +77,25 @@ while True:
 print "first"
 for x in range(noL):
     connList[x].send("INDEX %s"%x)
-    print x
+    time.sleep(0.05)
+
 
 print "second"
 for i in ran:
     connList[i].send("TRAITOR %s"%i)
-    print i
+    time.sleep(0.05)
+
 
 #starting algorithm
 print "third"
 if isT:
     for x in range(noL):
         connList[x].send("COMMAND %s %s C %s" %(noL, noT, randint(0,1)))
+        #time.sleep(0.005)
 else:
     for x in range(noL):
         connList[x].send("COMMAND %s %s C %s" %(noL, noT, command))
+        #time.sleep(0.005)
 
 while 1:
     a=1

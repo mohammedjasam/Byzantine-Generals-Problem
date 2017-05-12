@@ -1,6 +1,7 @@
 #!usr/bin/python
 from socket import *
 import math
+import time
 from random import randint
 host = 'localhost' # '127.0.0.1' can also be used
 port = 52000
@@ -10,11 +11,9 @@ isT = -1
 sock = socket()
 sock.connect((host, port)) #Connect takes tuple of host and port
 
+noOP = []
+noIP = []
 
-# #Infinite loop to keep client running.
-# message = raw_input("-> ")
-
-# while message!="q":
 while 1:
     data = sock.recv(1024)
     print data
@@ -39,23 +38,36 @@ while 1:
 
                 if isT==1:
                     random = randint(0,1)
-                    print random
+                    # print random
                     sock.send("INPUT C|%s %s %s" %(index,random,j))
                 else:
                     sock.send("INPUT C|%s %s %s" %(index,command,j))
 
 
     elif keyWord == "INPUT":
-        path = dataArr[1].split("|")
-        # path=len(path)-1
-        last = path[len(path)-1]
-        if isT:
-            sock.send("OUTPUT %s %s" %(randint(0,1),last))
-        else:
-            sock.send("OUTPUT %s %s" %(command,last))
+        noIP.append(dataArr[1])
+        if len(noIP) == noL-1:
+            for val in noIP:
+                path = val.split("|")
+                last = path[len(path)-1]
+                print last
+                time.sleep(0.05)#(randint(1,2)/25)
+                if isT:
+                    sock.send("OUTPUT %s %s" %(randint(0,1),last))
+                else:
+                    sock.send("OUTPUT %s %s" %(command,last))
 
-    elif keyWord == "OUTPUT"
-        
+    elif keyWord == "OUTPUT":
+        noOP.append(dataArr[1])
+        if len(noOP) == noL-1:
+            if noOP.count("1")>noOP.count("0"):
+                sock.send("MAJORITY 1")
+                print "MAJORITY 1"
+            else:
+                sock.send("MAJORITY 0")
+                print "MAJORITY 0"
+
+
 
 sock.close()
 
