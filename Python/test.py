@@ -1,3 +1,8 @@
-s = "a|b c"
+from random import randint
 
-print(s.split())
+random = randint(0,1)
+a=0
+while a<10:
+    print(randint(0,1))
+
+    a+=1

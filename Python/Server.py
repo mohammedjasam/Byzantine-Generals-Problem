@@ -14,13 +14,13 @@ port = 52000 #Use port > 1024, below it all are reserved
 
 # print "Enter"
 print "# of L, # of T, isTraitor?, Command\n"
-noL,noT,isT,command = 2,2,1,1
+noL,noT,isT,command = 3,2,1,1
 
 
 ran = []  ## List to store the Random Traitors
 for i in range(noT-isT):
     while True:
-        x = randint(0,noL)
+        x = randint(0,noL-1)
         if x not in ran:
             ran.append(x)
             break
@@ -40,6 +40,20 @@ def clientthread(conn):
          data = conn.recv(1024) # 1024 stands for bytes of data to be received
          print data
 
+         dataArr = data.split()
+         keyWord = dataArr[0]
+
+         if keyWord == "INPUT":
+             path = dataArr[1]
+             cmd = dataArr[2]
+             child = connList[int(dataArr[3])]
+             child.send("INPUT %s %s" %(path, cmd))
+
+         if keyWord == "OUTPUT":
+             cmd = dataArr[1];
+             child = connList[int(dataArr[2])]
+             child.send("OUTPUT %s" %(cmd))
+
 
 connList = []
 while True:
@@ -50,16 +64,18 @@ while True:
     if len(connList)==noL:
         break
 
-print(ran)
+print "first"
 for x in range(noL):
     connList[x].send("INDEX %s"%x)
+    print x
 
+print "second"
 for i in ran:
-    connList[i].send("TRAITOR")
-
+    connList[i].send("TRAITOR %s"%i)
+    print i
 
 #starting algorithm
-
+print "third"
 if isT:
     for x in range(noL):
         connList[x].send("COMMAND %s %s C %s" %(noL, noT, randint(0,1)))
