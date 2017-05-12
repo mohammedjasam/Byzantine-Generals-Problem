@@ -7,17 +7,18 @@ host = 'localhost' # '127.0.0.1' can also be used
 port = 52000
 
 index,noL,noT,command = -1,-1,-1,-1
+
 isT = -1
 sock = socket()
 sock.connect((host, port)) #Connect takes tuple of host and port
 
 noOP = []
 noIP = []
-
+last = -1
 while 1:
     data = sock.recv(1024)
     print data
-    print "\n"
+    # print "\n"
 
     dataArr = data.split()
     keyWord = dataArr[0]
@@ -38,73 +39,45 @@ while 1:
 
                 if isT==1:
                     random = randint(0,1)
-                    # print random
+                    time.sleep(0.5)
                     sock.send("INPUT C|%s %s %s" %(index,random,j))
                 else:
+                    time.sleep(0.5)
                     sock.send("INPUT C|%s %s %s" %(index,command,j))
 
 
     elif keyWord == "INPUT":
+        # print "dataArr is: %s" %dataArr[1]
         noIP.append(dataArr[1])
         if len(noIP) == noL-1:
             for val in noIP:
                 path = val.split("|")
                 last = path[len(path)-1]
-                print last
-                time.sleep(0.5)
+                # print last
                 if isT:
+                    time.sleep(0.5)
                     sock.send("OUTPUT %s %s" %(randint(0,1),last))
                 else:
+                    time.sleep(0.5)
                     sock.send("OUTPUT %s %s" %(command,last))
 
     elif keyWord == "OUTPUT":
+        # try:
+        #     if last!=-1:
+
+        print "DataArr is: %s"%dataArr
         noOP.append(dataArr[1])
+        # print "OP is: %s" %noOP
         if len(noOP) == noL-1:
+            time.sleep(5)
             if noOP.count("1")>noOP.count("0"):
+                # time.sleep(1)
                 sock.send("MAJORITY 1")
                 print "MAJORITY 1"
-            else:
+            elif noOP.count("1")<noOP.count("0"):
+                # time.sleep(1)
                 sock.send("MAJORITY 0")
                 print "MAJORITY 0"
-
-
-
-sock.close()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# import socket
-#
-# def main():
-#     host = "127.0.0.1"
-#     port = 5000
-#
-#     s = socket.socket()
-#     s.connect((host, port))
-#
-#     message = raw_input("-> ")
-#
-#     while message!="q":
-#         s.sendall(message)
-#         data = s.recv(1024)
-#
-#         print "Received from Server: "+ str(data)
-#
-#         message = raw_input("-> ")
-#
-#     s.close()
-#
-# if __name__ == "__main__":
-#     main()
+            else:
+                sock.send("MAJORITY %s"%)
+                print "MAJORITY %s" %s
