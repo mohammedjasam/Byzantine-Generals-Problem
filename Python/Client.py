@@ -6,7 +6,7 @@ from random import randint
 host = 'localhost' # '127.0.0.1' can also be used
 port = 52000
 
-index,noL,noT,command = -1,-1,-1,-1
+index,noL,noT,command,defVal = -1,-1,-1,-1,-1
 
 isT = -1
 sock = socket()
@@ -31,6 +31,7 @@ while 1:
         noL = int(dataArr[1])
         noT = int(dataArr[2])
         command = int(dataArr[4])
+        defVal = command
         # path = dataArr[3]
         # pathLen = len(dataArr[3])
         # for i in range(noT - pathLen):
@@ -54,7 +55,9 @@ while 1:
                 path = val.split("|")
                 last = path[len(path)-1]
                 # print last
-                if isT:
+                if isT==1:
+                    # print "isT is: %s"%isT
+                    # print "Running traitor"
                     time.sleep(0.5)
                     sock.send("OUTPUT %s %s" %(randint(0,1),last))
                 else:
@@ -71,13 +74,11 @@ while 1:
         if len(noOP) == noL-1:
             time.sleep(5)
             if noOP.count("1")>noOP.count("0"):
-                # time.sleep(1)
                 sock.send("MAJORITY 1")
                 print "MAJORITY 1"
             elif noOP.count("1")<noOP.count("0"):
-                # time.sleep(1)
                 sock.send("MAJORITY 0")
                 print "MAJORITY 0"
             else:
-                sock.send("MAJORITY %s"%)
-                print "MAJORITY %s" %s
+                sock.send("MAJORITY %s"%defVal)
+                print "MAJORITY %s" %defVal

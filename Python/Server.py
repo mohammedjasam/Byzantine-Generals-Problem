@@ -90,7 +90,7 @@ for i in ran:
 
 #starting algorithm
 # print "third"
-if isT:
+if isT==1:
     for x in range(noL):
         time.sleep(1)
 
