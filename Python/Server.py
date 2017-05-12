@@ -2,7 +2,6 @@ import time
 from socket import *
 from thread import *
 import math
-import threading
 from random import randint
 
 
@@ -40,11 +39,9 @@ def clientthread(conn):
          data = conn.recv(1024) # 1024 stands for bytes of data to be received
          print data
          #time.sleep(0.05)
-         thread
          dataArr = data.split()
          keyWord = dataArr[0]
         #  print dataArr
-        threading.Event().wait()
          if keyWord == "INPUT":
              path = dataArr[1]
              cmd = dataArr[2]
@@ -91,11 +88,11 @@ print "third"
 if isT:
     for x in range(noL):
         connList[x].send("COMMAND %s %s C %s" %(noL, noT, randint(0,1)))
-        #time.sleep(0.005)
+        time.sleep(0.05)
 else:
     for x in range(noL):
         connList[x].send("COMMAND %s %s C %s" %(noL, noT, command))
-        #time.sleep(0.005)
+        time.sleep(0.05)
 
 while 1:
     a=1

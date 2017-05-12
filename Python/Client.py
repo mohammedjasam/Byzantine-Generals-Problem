@@ -51,7 +51,7 @@ while 1:
                 path = val.split("|")
                 last = path[len(path)-1]
                 print last
-                time.sleep(0.05)#(randint(1,2)/25)
+                time.sleep(0.5)
                 if isT:
                     sock.send("OUTPUT %s %s" %(randint(0,1),last))
                 else:
